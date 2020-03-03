@@ -1,0 +1,13 @@
+<messageStore xmlns="http://ws.apache.org/ns/synapse" name="test-aiops" class="org.apache.synapse.message.store.impl.rabbitmq.RabbitMQStore">
+<parameter name="store.rabbitmq.host.name">localhost</parameter>
+<parameter name="store.rabbitmq.host.port">5672</parameter>
+<parameter name="store.rabbitmq.route.key">test-aiops</parameter>
+<parameter name="rabbitmq.connection.ssl.truststore.type">JKS</parameter>
+<parameter name="store.rabbitmq.username">guest</parameter>
+<parameter name="rabbitmq.connection.ssl.enabled">false</parameter>
+<parameter name="store.rabbitmq.exchange.name">test1</parameter>
+<parameter name="store.rabbitmq.queue.name">test-aiops</parameter>
+<parameter name="rabbitmq.connection.ssl.keystore.type">PKCS12</parameter>
+<parameter name="rabbitmq.connection.ssl.version">SSL</parameter>
+<parameter name="store.rabbitmq.password">guest</parameter>
+</messageStore>

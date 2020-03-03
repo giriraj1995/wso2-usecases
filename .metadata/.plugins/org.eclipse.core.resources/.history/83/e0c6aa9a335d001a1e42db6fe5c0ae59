@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="ep" xmlns="http://ws.apache.org/ns/synapse">
+    <axis2ns1:parameter name="topic" xmlns:axis2ns1="http://ws.apache.org/ns/synapse"/>
+    <endpoint name="$name">
+        <address statistics="enable" trace="enable" uri="rabbitmq:/PubSubDynamicService?rabbitmq.server.host.name=localhost&amp;rabbitmq.server.port=5672&amp;rabbitmq.exchange.name=test0&amp;rabbitmq.queue.routing.key=$topic">
+            <suspendOnFailure>
+                <initialDuration>-1</initialDuration>
+                <progressionFactor>1.0</progressionFactor>
+            </suspendOnFailure>
+            <markForSuspension>
+                <retriesBeforeSuspension>0</retriesBeforeSuspension>
+            </markForSuspension>
+        </address>
+    </endpoint>
+</template>

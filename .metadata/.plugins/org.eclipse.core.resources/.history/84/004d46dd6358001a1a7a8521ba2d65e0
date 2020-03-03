@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/event" name="AlertAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST PUT GET" uri-template="/{eventID}">
+        <inSequence>
+            <log description="Post Log" level="custom">
+                <property name="message" value="Welcome to AlertAPI"/>
+            </log>
+            <respond description="Back to client"/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="PubSubmicro" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="PUBSUB LOG" level="full">
+        <property expression="json-eval($)" name="welcomePUBSUBM"/>
+    </log>
+    <propertyGroup description="Setting Properties">
+        <property expression="json-eval($.customerID)" name="CustomerID" scope="default" type="STRING"/>
+        <property expression="json-eval($.eventID)" name="EventID" scope="default" type="STRING"/>
+        <property expression="json-eval($.Location)" name="Location" scope="default" type="STRING"/>
+    </propertyGroup>
+    <property description="setting topic" expression="fn:concat(fn:concat('event/alert/customers',get-property('customerID')),fn:concat('/locations/',get-property('Location')))" name="topic" scope="default" type="STRING"/>
+    <log level="custom">
+        <property expression="$ctx:topic" name="topic"/>
+    </log>
+</sequence>

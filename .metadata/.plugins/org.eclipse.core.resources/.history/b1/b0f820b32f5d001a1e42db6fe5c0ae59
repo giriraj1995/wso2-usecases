@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="PubSubDynamicService" startOnLoad="true" transports="http https" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <log level="full">
+                <property expression="json-eval($)" name="Body in ProxyService"/>
+            </log>
+            <propertyGroup description="Getting ApplicationID &amp; Subscription">
+                <property expression="json-eval($.ApplicationID)" name="ApplicationID" scope="default" type="STRING"/>
+                <property expression="json-eval($.Subscription)" name="Subscription" scope="default" type="STRING"/>
+            </propertyGroup>
+            <switch description="Switch" source="$ctx:Subscription">
+                <case regex="on">
+                    <log level="full">
+                        <property expression="json-eval($)" name="body in On "/>
+                    </log>
+                    <property expression="fn:concat(fn:concat(fn:concat('service/',get-property('ApplicationID')),'/subscriptions/'),get-property('Subscription'))" name="topic" scope="default" type="STRING"/>
+                    <log level="custom">
+                        <property expression="$ctx:topic" name="topic"/>
+                    </log>
+                    <property name="Payload" scope="default" type="STRING" value="event/alert/customers/+/locations/+"/>
+                    <property expression="get-property('topic')" name="uri.var.topic" scope="default" type="STRING"/>
+                    <log level="custom">
+                        <property expression="$ctx:Payload" name="paylaod"/>
+                    </log>
+                    <payloadFactory media-type="json">
+                        <format>{&#xd;
+      "payload": "event/alert/customers/+/locations/+"&#xd;
+} </format>
+                        <args/>
+                    </payloadFactory>
+                    <log description="Log request payload" level="full"/>
+                    <property description="Initiate asynchronous mediation flow" name="OUT_ONLY" scope="default" type="STRING" value="true"/>
+                    <property description="Generate 202 response from mediation flow" name="FORCE_SC_ACCEPTED" scope="axis2" type="STRING" value="true"/>
+                    <property expression="$ctx:topic" name="REST_URL_POSTFIX" scope="axis2" type="STRING"/>
+                    <property name="HTTP_METHOD" scope="axis2" type="STRING" value="POST"/>
+                    <call>
+                        <endpoint>
+                            <address uri="rabbitmq:PubSubDynamicService?rabbitmq.server.host.name=localhost&amp;rabbitmq.server.port=5672&amp;rabbitmq.exchange.name=test0&amp;rabbitmq.queue.routing.key=">
+                                <suspendOnFailure>
+                                    <initialDuration>-1</initialDuration>
+                                    <progressionFactor>1</progressionFactor>
+                                </suspendOnFailure>
+                                <markForSuspension>
+                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                                </markForSuspension>
+                            </address>
+                        </endpoint>
+                    </call>
+                </case>
+                <case regex="off">
+                    <log level="full">
+                        <property expression="json-eval($)" name="Body in off"/>
+                    </log>
+                    <property expression="fn:concat(fn:concat(fn:concat('service/',get-property('ApplicationID')),'/subscriptions/'),get-property('Subscription'))" name="topic" scope="default" type="STRING"/>
+                    <log level="custom">
+                        <property expression="$ctx:topic" name="topic"/>
+                    </log>
+                    <property name="Payload" scope="default" type="STRING" value="event/incident/customers/+/locations/+"/>
+                    <log level="custom">
+                        <property expression="$ctx:Payload" name="paylaod"/>
+                    </log>
+                    <respond/>
+                </case>
+                <default>
+                    <log level="custom">
+                        <property name="Invalid" value="Should be on/off"/>
+                    </log>
+                    <respond/>
+                </default>
+            </switch>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </target>
+</proxy>

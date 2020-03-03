@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/pubsub" name="PubSubAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST">
+        <inSequence>
+            <log description="Input Log" level="custom">
+                <property name="message" value="Welcome to PubSubAPI"/>
+                <property expression="json-eval($)" name="inputmessage"/>
+            </log>
+            <property description="Setting EventID" expression="json-eval($.eventID)" name="EventID" scope="default" type="STRING"/>
+            <log description="Check" level="custom">
+                <property expression="fn:concat('EventID : ',get-property('EventID'))" name="Message"/>
+            </log>
+            <store description="Queuing the playload to itsm-test" messageStore="test-itsm"/>
+            <respond description="Back to AlertAPI "/>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/subscribe">
+        <inSequence>
+            <sequence key="SubscribeITSM"/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

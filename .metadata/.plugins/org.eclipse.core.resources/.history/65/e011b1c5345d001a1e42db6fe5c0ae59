@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns="http://ws.apache.org/ns/synapse" name="Template1">
+	<endpoint name="$name">
+		<address uri="rabbitmq:/PubSubDynamicService?rabbitmq.server.host.name=localhost&amp;rabbitmq.server.port=5672&amp;rabbitmq.exchange.name=test0&amp;rabbitmq.queue.routing.key=">
+			<suspendOnFailure>
+				<progressionFactor>1.0</progressionFactor>
+			</suspendOnFailure>
+			<markForSuspension>
+				<retriesBeforeSuspension>0</retriesBeforeSuspension>
+				<retryDelay>0</retryDelay>
+			</markForSuspension>
+		</address>
+	</endpoint>
+</template>
