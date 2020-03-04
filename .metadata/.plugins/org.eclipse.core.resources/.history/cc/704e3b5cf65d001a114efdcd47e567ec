@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="CacheSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <clone id="PubandSub" sequential="true">
+        <target>
+            <sequence>
+                <log>
+                    <property expression="json-eval($)" name="catch1"/>
+                </log>
+                <send>
+                    <endpoint>
+                        <http method="post" uri-template="http://localhost:8280/event0/alert0">
+                            <suspendOnFailure>
+                                <initialDuration>-1</initialDuration>
+                                <progressionFactor>-1</progressionFactor>
+                                <maximumDuration>0</maximumDuration>
+                            </suspendOnFailure>
+                            <markForSuspension>
+                                <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                            </markForSuspension>
+                        </http>
+                    </endpoint>
+                </send>
+            </sequence>
+        </target>
+        <target>
+            <sequence>
+                <log>
+                    <property expression="json-eval($)" name="catch2"/>
+                </log>
+                <property expression="get-property('Subscription')" name="Subscription" scope="default" type="STRING"/>
+                <switch description="check for subs" source="get-property('Subscription')">
+                    <case regex="on">
+                        <sequence key="PubSubmicro"/>
+                    </case>
+                    <case regex="off">
+                        <log>
+                            <property name="Message" value="Sorry, you are not subscribed to this service"/>
+                        </log>
+                        <drop/>
+                    </case>
+                    <default>
+                        <log>
+                            <property name="Invalid" value="Should be on/off"/>
+                        </log>
+                    </default>
+                </switch>
+            </sequence>
+        </target>
+    </clone>
+</sequence>

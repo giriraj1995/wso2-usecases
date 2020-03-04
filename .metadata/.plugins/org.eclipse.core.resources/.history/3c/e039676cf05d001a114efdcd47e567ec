@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="CacheSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <clone id="PubandSub" sequential="true">
+        <target>
+            <sequence/>
+            <endpoint>
+                <http method="post" uri-template="http://localhost:8280/event0/alert0">
+                    <suspendOnFailure>
+                        <initialDuration>-1</initialDuration>
+                        <progressionFactor>-1</progressionFactor>
+                        <maximumDuration>0</maximumDuration>
+                    </suspendOnFailure>
+                    <markForSuspension>
+                        <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                    </markForSuspension>
+                </http>
+                <description>Suscription sequence</description>
+            </endpoint>
+        </target>
+        <target>
+            <sequence>
+                <property expression="get-property('Subscription')" name="Subscription" scope="default" type="STRING"/>
+                <filter description="check for subs" regex="on" source="$ctx:Subscription">
+                    <then>
+                        <sequence key="PubSubmicro"/>
+                    </then>
+                    <else>
+                        <log>
+                            <property name="Message" value="Sorry, you are not subscribed to this service"/>
+                        </log>
+                    </else>
+                </filter>
+            </sequence>
+        </target>
+    </clone>
+</sequence>

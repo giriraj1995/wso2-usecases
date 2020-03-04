@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint name="ITSMEP" xmlns="http://ws.apache.org/ns/synapse">
+    <http method="post" uri-template="http://10.77.240.17:8280/subscribe/itsm">
+        <suspendOnFailure>
+            <initialDuration>-1</initialDuration>
+            <progressionFactor>1</progressionFactor>
+        </suspendOnFailure>
+        <markForSuspension>
+            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+        </markForSuspension>
+    </http>
+</endpoint>

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sequence name="Sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <store description="Feeding the playload into the Queue" messageStore="test-itsm"/>
-    <drop description="Finish Sequence"/>
-</sequence>

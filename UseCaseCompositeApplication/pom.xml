@@ -9,22 +9,23 @@
   <name>UseCaseCompositeApplication</name>
   <description>UseCaseCompositeApplication</description>
   <properties>
-    <com.example.UseCase.message-store_._test-itsm>capp/EnterpriseServiceBus</com.example.UseCase.message-store_._test-itsm>
+    <com.example.UseCase.message-store_._test-aiops>capp/EnterpriseServiceBus</com.example.UseCase.message-store_._test-aiops>
+    <com.example.UseCase.sequence_._SubscribeAIOPS>capp/EnterpriseServiceBus</com.example.UseCase.sequence_._SubscribeAIOPS>
+    <com.example.UseCase.message-processors_._SubscribeItsm-test>capp/EnterpriseServiceBus</com.example.UseCase.message-processors_._SubscribeItsm-test>
     <com.example.UseCase.message-processors_._SubscribeAiops-test>capp/EnterpriseServiceBus</com.example.UseCase.message-processors_._SubscribeAiops-test>
-    <com.example.UseCase.api_._PubSubAPI>capp/EnterpriseServiceBus</com.example.UseCase.api_._PubSubAPI>
-    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
-    <com.example.UseCase.sequence_._PubSubmicro>capp/EnterpriseServiceBus</com.example.UseCase.sequence_._PubSubmicro>
+    <com.example.UseCase.endpoint_._ITSMEP>capp/EnterpriseServiceBus</com.example.UseCase.endpoint_._ITSMEP>
+    <com.example.UseCase.api_._AlertAPI1>capp/EnterpriseServiceBus</com.example.UseCase.api_._AlertAPI1>
     <com.example.UseCase.sequence_._SubscribeITSM>capp/EnterpriseServiceBus</com.example.UseCase.sequence_._SubscribeITSM>
+    <com.example.UseCase.sequence_._PubSubmicro>capp/EnterpriseServiceBus</com.example.UseCase.sequence_._PubSubmicro>
+    <com.example.UseCase.sequence_._CacheSequence>capp/EnterpriseServiceBus</com.example.UseCase.sequence_._CacheSequence>
     <com.example.UseCase.api_._AlertAPI>capp/EnterpriseServiceBus</com.example.UseCase.api_._AlertAPI>
+    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
+    <com.example.UseCase.endpoint_._AIOPSEP>capp/EnterpriseServiceBus</com.example.UseCase.endpoint_._AIOPSEP>
     <com.example.UseCase.sequence_._PublishMessageSQ>capp/EnterpriseServiceBus</com.example.UseCase.sequence_._PublishMessageSQ>
     <com.example.UseCase.sequence_._Sequence>capp/EnterpriseServiceBus</com.example.UseCase.sequence_._Sequence>
-    <com.example.UseCase.message-store_._test-aiops>capp/EnterpriseServiceBus</com.example.UseCase.message-store_._test-aiops>
-    <com.example.UseCase.message-processors_._SubscribeItsm-test>capp/EnterpriseServiceBus</com.example.UseCase.message-processors_._SubscribeItsm-test>
-    <com.example.UseCase.endpoint_._ITSMEP>capp/EnterpriseServiceBus</com.example.UseCase.endpoint_._ITSMEP>
-    <com.example.UseCase.endpoint_._AIOPSEP>capp/EnterpriseServiceBus</com.example.UseCase.endpoint_._AIOPSEP>
-    <com.example.UseCase.api_._AlertAPI1>capp/EnterpriseServiceBus</com.example.UseCase.api_._AlertAPI1>
+    <com.example.UseCase.message-store_._test-itsm>capp/EnterpriseServiceBus</com.example.UseCase.message-store_._test-itsm>
     <com.example.UseCase.api_._Subscribe>capp/EnterpriseServiceBus</com.example.UseCase.api_._Subscribe>
-    <com.example.UseCase.sequence_._SubscribeAIOPS>capp/EnterpriseServiceBus</com.example.UseCase.sequence_._SubscribeAIOPS>
+    <com.example.UseCase.api_._PubSubAPI>capp/EnterpriseServiceBus</com.example.UseCase.api_._PubSubAPI>
   </properties>
   <dependencies>
     <dependency>
@@ -96,6 +97,12 @@
     <dependency>
       <groupId>com.example.UseCase.message-store</groupId>
       <artifactId>test-itsm</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.example.UseCase.sequence</groupId>
+      <artifactId>CacheSequence</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>

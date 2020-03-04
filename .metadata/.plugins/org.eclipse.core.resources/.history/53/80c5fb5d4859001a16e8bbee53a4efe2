@@ -1,3 +1,0 @@
-<api xmlns="http://ws.apache.org/ns/synapse" context="/subscribe" name="Subscribe">
-<resource methods="GET"><inSequence/><outSequence/><faultSequence/></resource>
-</api>

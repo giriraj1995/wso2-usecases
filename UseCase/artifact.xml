@@ -35,4 +35,7 @@
     <artifact name="SubscribeITSM" groupId="com.example.UseCase.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/SubscribeITSM.xml</file>
     </artifact>
+    <artifact name="CacheSequence" groupId="com.example.UseCase.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/CacheSequence.xml</file>
+    </artifact>
 </artifacts>

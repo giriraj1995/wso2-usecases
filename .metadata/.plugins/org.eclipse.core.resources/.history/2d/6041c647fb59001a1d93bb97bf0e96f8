@@ -1,3 +1,0 @@
-<api xmlns="http://ws.apache.org/ns/synapse" context="/pubsub0" name="PubSubAPI0">
-<resource methods="GET"><inSequence/><outSequence/><faultSequence/></resource>
-</api>

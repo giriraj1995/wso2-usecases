@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="PubSubmicro" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <clone id="Subs and Pubs" sequential="true">
+        <target>
+            <sequence/>
+            <endpoint>
+                <http method="post" uri-template="http://localhost:8280/event0/alert0">
+                    <suspendOnFailure>
+                        <initialDuration>-1</initialDuration>
+                        <progressionFactor>-1</progressionFactor>
+                        <maximumDuration>0</maximumDuration>
+                    </suspendOnFailure>
+                    <markForSuspension>
+                        <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                    </markForSuspension>
+                </http>
+            </endpoint>
+        </target>
+        <target>
+            <sequence>
+                <filter description="check for subs" regex="on" source="get-property('Subscription')">
+                    <then/>
+                    <else/>
+                </filter>
+            </sequence>
+        </target>
+    </clone>
+    <log description="PUBSUB LOG" level="full">
+        <property expression="json-eval($)" name="welcomePUBSUBM"/>
+    </log>
+    <propertyGroup description="Setting Properties">
+        <property expression="json-eval($.customerID)" name="CustomerID" scope="default" type="STRING"/>
+        <property expression="json-eval($.eventID)" name="EventID" scope="default" type="STRING"/>
+        <property expression="json-eval($.Location)" name="Location" scope="default" type="STRING"/>
+    </propertyGroup>
+    <property description="setting topic" expression="fn:concat(fn:concat('event/alert/customers/',get-property('CustomerID')),fn:concat('/locations/',get-property('Location')))" name="topic" scope="default" type="STRING"/>
+    <log description="Topic Log" level="custom">
+        <property expression="$ctx:topic" name="topic"/>
+    </log>
+    <switch description="Switch By topic" source="$ctx:topic">
+        <case regex="event/alert/customers/yerba/locations/Germany">
+            <log description="AIOPS" level="custom">
+                <property name="AIOPS" value="Routing to AIOPS Queue"/>
+            </log>
+            <store description="Queuing to Aiops" messageStore="test-aiops"/>
+            <respond/>
+        </case>
+        <case regex="event/alert/customers/total/locations/France">
+            <log description="ITSM" level="custom">
+                <property name="ITSM" value="Routing to ITSM Queue"/>
+            </log>
+            <store description="Queuing to ITSM" messageStore="test-itsm"/>
+            <respond/>
+        </case>
+        <default>
+            <log level="custom">
+                <property name="Invalid" value="Payload"/>
+            </log>
+            <respond/>
+        </default>
+    </switch>
+</sequence>

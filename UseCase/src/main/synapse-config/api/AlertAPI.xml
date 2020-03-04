@@ -18,7 +18,7 @@
             </log>
             <send>
                 <endpoint>
-                    <http method="post" uri-template="http://10.77.250.148:8280/pubsub">
+                    <http method="post" uri-template="http://localhost:8280/pubsub">
                         <suspendOnFailure>
                             <initialDuration>-1</initialDuration>
                             <progressionFactor>-1</progressionFactor>

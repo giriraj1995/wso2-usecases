@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sequence name="PubSubmicroservice" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <store description="Publishing message to Queue itsm-test" messageStore="test-itsm"/>
-    <drop description="Finish Sequence"/>
-</sequence>
