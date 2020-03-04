@@ -1,0 +1,10 @@
+{
+  "Subscription": "off",       
+  "ApplicationID": "AIOPS",
+  "eventID": "alert",
+  "customerID": "yerba",
+  "Location": "Germany",
+  "alertPriority": "Urgent",
+  "assertId": "tatat01",
+  "Description": "RAM 99% threshold reached"
+}

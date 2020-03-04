@@ -1,0 +1,10 @@
+{
+  "Subscription": "off",       
+  "ApplicationID": "ITSM",
+  "eventID": "alert",
+  "customerID": "total",
+  "Location": "France",
+  "alertPriority": "Urgent",
+  "assertId": "toto01",
+  "Description": "CPU 99% threshold reached"
+}
